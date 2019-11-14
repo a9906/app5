@@ -1,0 +1,645 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Micro serviço de gestão de utilizadores. \n",
+    "version" : "1.0.0",
+    "title" : "Users Active Directory API",
+    "termsOfService" : "http://swagger.io/terms/",
+    "contact" : {
+      "email" : "dmesquita@ipca.pt"
+    },
+    "license" : {
+      "name" : "Node.js 7.9",
+      "url" : "https://github.com/nodejs/node/blob/master/LICENSE"
+    }
+  },
+  "host" : "localhost:3000",
+  "basePath" : "",
+  "tags" : [ {
+    "name" : "Get Data",
+    "description" : "Retorno de dados"
+  }, {
+    "name" : "Insert Data",
+    "description" : "Inserção de dados"
+  } ],
+  "schemes" : [ "http","https"],
+  "paths" : {
+
+
+
+
+    
+    "/users/find/{name}" : {
+      "get" : {      
+        "tags" : [ "Get Data" ],
+        "summary" : "Encontrar utilizador",
+        "description" : "Encontrar um utilizador",
+        "operationId" : "userfind",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Nome do utilizador",
+          "required" : true,
+          "type" : "string"
+        }     
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "204" : {
+            "description" : "Nenhum utilizador encontrado..."
+          },
+          "400" : {
+            "description" : "ERROR"
+          }
+        }
+      }
+    },
+
+
+    "/users" : {
+      "get" : {
+        "tags" : [ "Get Data" ],
+        "summary" : "All Users",
+        "description" : "Todos os utilizadores",
+        "operationId" : "users",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "204" : {
+            "description" : "The users doesn't exist!"
+          },
+          "400" : {
+            "description" : "Failed to get data..."
+          }
+        }
+      }
+    },
+
+    "/groups" : {
+      "get" : {
+        "tags" : [ "Get Data" ],
+        "summary" : "All Groups",
+        "description" : "Todos os grupos",
+        "operationId" : "groups",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "204" : {
+            "description" : "The users doesn't exist!"
+          },
+          "400" : {
+            "description" : "Failed to get data..."
+          }
+        }
+      }
+    },
+    "/users/deleteUser" : {
+      "delete" : {
+        "tags" : [ "Delete Data" ],
+        "summary" : "Delete User",
+        "description" : "delete user",
+        "operationId" : "deleteUser",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Insere um ponto completo.",
+          "required" : true,
+          "schema" : {
+            "$ref": "#/definitions/DadosEditUserBody2" }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "User Deleted..."
+              },
+              "400" : {
+                "description" : "Failed to delete User..."
+              }
+            }
+          }
+        },
+        "/users/editUser" : {
+          "put" : {
+            "tags" : [ "Edit Data" ],
+            "summary" : "Edit User",
+            "description" : "Edit user",
+            "operationId" : "editUser",
+            "produces" : [ "application/json" ],
+            "parameters" : [ {
+              "name" : "body",
+              "in" : "body",
+              "description" : "Insere os dados do objeto.",
+              "required" : true,
+              "schema" : {
+                "$ref": "#/definitions/DadosEditUserBody" }
+                } ],
+                "responses" : {
+                  "200" : {
+                    "description" : "User Updated..."
+                  },
+                  "400" : {
+                    "description" : "Failed to update the User..."
+                  }
+                }
+              }
+            },
+        "/users/disableUser" : {
+          "put" : {
+            "tags" : [ "Edit Data" ],
+            "summary" : "Disable User",
+            "description" : "Disable User",
+            "operationId" : "disableUser",
+            "produces" : [ "application/json" ],
+            "parameters" : [ {            
+                  "name" : "body",
+                  "in" : "body",
+                  "description" : "Insere um ponto completo.",
+                  "required" : true,
+                  "schema" : {
+                    "$ref": "#/definitions/DadosEditUserBody2" }
+                    }             
+              ],
+                "responses" : {
+                  "200" : {
+                    "description" : "User disable..."
+                  },
+                  "400" : {
+                    "description" : "Failed to disable User..."
+                  }
+                }
+              }
+            },
+            "/users/enableUser" : {
+              "put" : {
+                "tags" : [ "Edit Data" ],
+                "summary" : "Enable User",
+                "description" : "Enable User",
+                "operationId" : "enableUser",
+                "produces" : [ "application/json" ],
+                "parameters" : [ {            
+                      "name" : "body",
+                      "in" : "body",
+                      "description" : "Insere um ponto completo.",
+                      "required" : true,
+                      "schema" : {
+                        "$ref": "#/definitions/DadosEditUserBody2" }
+                        }             
+                  ],
+                    "responses" : {
+                      "200" : {
+                        "description" : "User Enable..."
+                      },
+                      "400" : {
+                        "description" : "Failed to Enable User..."
+                      }
+                    }
+                  }
+                },
+                "/users/changePassword" : {
+                  "put" : {
+                    "tags" : [ "Edit Data" ],
+                    "summary" : "change Password ",
+                    "description" : "change Password ",
+                    "operationId" : "changePassword ",
+                    "produces" : [ "application/json" ],
+                    "parameters" : [ {            
+                          "name" : "body",
+                          "in" : "body",
+                          "description" : "Insere um ponto completo.",
+                          "required" : true,
+                          "schema" : {
+                            "$ref": "#/definitions/DadosEditUserBody3" }
+                            }             
+                      ],
+                        "responses" : {
+                          "200" : {
+                            "description" : "User password changed..."
+                          },
+                          "400" : {
+                            "description" : "Failed to change password..."
+                          }
+                        }
+                      }
+                    },
+                    "/users/resetpassword" : {
+                      "put" : {
+                        "tags" : [ "Edit Data" ],
+                        "summary" : "Reset Password ",
+                        "description" : "Reset Password ",
+                        "operationId" : "resetPassword ",
+                        "produces" : [ "application/json" ],
+                        "parameters" : [ {            
+                              "name" : "body",
+                              "in" : "body",
+                              "description" : "Insere um ponto completo.",
+                              "required" : true,
+                              "schema" : {
+                                "$ref": "#/definitions/DadosEditUserBody2" }
+                                }             
+                          ],
+                            "responses" : {
+                              "200" : {
+                                "description" : "User password changed..."
+                              },
+                              "400" : {
+                                "description" : "Failed to change password..."
+                              }
+                            }
+                          }
+                        },
+                    "/update" : {
+                      "put" : {
+                        "tags" : [ "Update" ],
+                        "summary" : "Update",
+                        "description" : "Update",
+                        "operationId" : "updateGeneric",
+                        "produces" : [ "application/json" ],
+                        "parameters" : [ {            
+                              "name" : "body",
+                              "in" : "body",
+                              "description" : "Insere um ponto completo.",
+                              "required" : true,
+                              "schema" : {
+                                "$ref": "#/definitions/DadosEditUserBody" }
+                                }             
+                          ],
+                            "responses" : {
+                              "200" : {
+                                "description" : "Updated..."
+                              },
+                              "400" : {
+                                "description" : "Failed to update..."
+                              }
+                            }
+                          }
+                        },
+
+                        "/users/changegroup" : {
+                          "put" : {
+                            "tags" : [ "Change Group" ],
+                            "summary" : "Change Group",
+                            "description" : "Change Group",
+                            "operationId" : "changeGroup",
+                            "produces" : [ "application/json" ],
+                            "parameters" : [ {            
+                                  "name" : "body",
+                                  "in" : "body",
+                                  "description" : "Insere um ponto completo.",
+                                  "required" : true,
+                                  "schema" : {
+                                    "$ref": "#/definitions/DadosEditUserBody" }
+                                    }             
+                              ],
+                                "responses" : {
+                                  "200" : {
+                                    "description" : "Change Group..."
+                                  },
+                                  "400" : {
+                                    "description" : "Failed to change group..."
+                                  }
+                                }
+                              }
+                            },
+    
+    "/users/addUser" : {
+      "post" : {
+        "tags" : [ "Insert Data" ],
+        "summary" : "Add User",
+        "description" : "Add new user",
+        "operationId" : "addUser",
+        "produces" : [ "application/json" ],
+
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Insere os dados do objeto.",
+          "required" : true,
+          "schema" : {
+            "$ref": "#/definitions/DadosEditUserBody"  }
+            } ],
+            "responses" : {
+              "200" : {
+                "description" : "User Inserted..."
+              },
+              "400" : {
+                "description" : "Failed to Insert User..."
+              }
+            }
+          }
+        }
+  },
+  "definitions" : {
+
+    "option1" : {
+      "type" : "object",
+      "properties" : {
+
+        "dn" : {
+          "type" : "string"
+        },
+        "dominio1" : {
+          "type" : "string"
+        },
+        "dominio2" : {
+          "type" : "string"
+        },
+        "user" : {
+          "type" : "string"
+        },
+        "cn" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "dn" : "CN=Employees,OU=Groups,DC=ipca,DC=local",
+        "dominio1" : "ipca",
+        "dominio2" : "local",
+        "user" : "Dan",
+        "cn" : "Users",
+        "password" : "Ipca2016"
+      },
+      "xml" : {
+        "name" : "option1"
+      }
+    },
+    "option2" : {
+      "type" : "object",
+      "properties" : {
+
+        "dn" : {
+          "type" : "string"
+        },
+        "dominio1" : {
+          "type" : "string"
+        },
+        "dominio2" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "ou" : {
+          "type" : "string",
+          "description" : "Se é ponto do instituto"
+        },
+        "objectclass": {
+          "type": "array",
+          "items": {
+          "type": "string"
+          }
+        }
+      },
+      "example" : {
+        "dn" : "CN=Employees,OU=Groups,DC=ipca,DC=local",
+        "dominio1" : "ipca",
+        "dominio2" : "local",
+        "name" : "luis4",
+        "ou" : "Alunos",
+        "objectclass": [  "top", "person", "organizationalPerson",  "user" ]
+      },
+      "xml" : {
+        "name" : "option2"
+      }
+    
+  },
+    "option3" : {
+      "type" : "object",
+      "properties" : {
+
+        "dn" : {
+          "type" : "string"
+        },
+        "distinguishedName" : {
+          "type" : "string"
+        },
+        "userPrincipalName" : {
+          "type" : "string"
+        },
+        "sAMAccountName" : {
+          "type" : "string"
+        },
+        "telephoneNumber" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "userPassword" : {
+          "type" : "string"
+        },
+        "mail" : {
+          "type" : "string",
+          "description" : "Se é ponto do instituto"
+        }
+
+      },
+      "example" : {
+        "dn" : "CN=Employees,OU=Groups,DC=ipca,DC=local",
+        "dominio1" : "ipca",
+        "dominio2" : "local",
+        "user" : "Dan",
+        "cn" : "Users",
+        "password" : "Ipca2016",
+        "name" : "luis4",
+        "ou" : "Alunos",
+        "parametro" : "telephoneNumber",
+        "parametroValor" : "965344455"
+      },
+      "xml" : {
+        "name" : "option3"
+      }
+    },
+    
+    "option4" : {
+      "type" : "object",
+      "properties" : {
+
+        "userPassword" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+
+         "password" : "Ipca2016"
+
+      },
+      "xml" : {
+        "name" : "option4"
+      }
+    },
+
+
+    "DadosEditUserBody" : {
+      "type" : "object",
+      "properties" : {
+        "option1": {
+          "$ref": "#/definitions/option1"
+          },
+        "option2": {
+          "$ref": "#/definitions/option2"
+          },
+        "option3": {
+          "$ref": "#/definitions/option3"
+          }
+      },
+      "example" : {
+        "option1" : {
+                      "dn" : "CN=Dan,CN=Users,DC=ipca,DC=local",
+                      "dominio1" : "ipca",
+                      "dominio2" : "local",
+                      "user" : "Dan",
+                      "cn" : "Users",
+                      "password" : "Ipca2016"
+                    },
+        "option2" : {
+                      "dn": "CN=Luis4,OU=Alunos,DC=ipca,DC=local",
+                      "dominio1" : "ipca",
+                      "dominio2" : "local",
+                      "name" : "luis4",
+                      "ou" : "Alunos",
+                      "objectclass": [  "top", "person", "organizationalPerson",  "user" ]
+                    },
+
+        "option3" : {
+                      "dn": "CN=Luis4,OU=Alunos,DC=ipca,DC=local",
+                      "distinguishedName": "cn=luis2,ou=Alunos,dc=ipca,dc=local",
+                      "userPrincipalName": "luis2@alunos.ipca.pt",
+                      "sAMAccountName": "luis",
+                      "telephoneNumber": "123123",
+                      "userPassword": "Ipca2016",
+                      "mail": "luis2@alunos.ipca.pt"
+        }       
+      },
+      "xml" : {
+        "name" : "DadosEditUserBody"
+      }
+    },
+
+    "DadosEditUserBody2" : {
+      "type" : "object",
+      "properties" : {
+        "option1": {
+          "$ref": "#/definitions/option1"
+          },
+        "option2": {
+          "$ref": "#/definitions/option2"
+          }
+      },
+      "example" : {
+        "option1" : {
+                      "dn" : "CN=Dan,CN=Users,DC=ipca,DC=local",
+                      "dominio1" : "ipca",
+                      "dominio2" : "local",
+                      "user" : "Dan",
+                      "cn" : "Users",
+                      "password" : "Ipca2016"
+                    },
+        "option2" : {
+                      "dn": "CN=Luis4,OU=Alunos,DC=ipca,DC=local",
+                      "dominio1" : "ipca",
+                      "dominio2" : "local",
+                      "name" : "luis4",
+                      "ou" : "Alunos",
+                      "objectclass": [  "top", "person", "organizationalPerson",  "user" ]
+                    }     
+      },
+      "xml" : {
+        "name" : "DadosEditUserBody"
+      }
+    },
+
+    "DadosEditUserBody3" : {
+      "type" : "object",
+      "properties" : {
+        "option1": {
+          "$ref": "#/definitions/option1"
+          },
+        "option2": {
+          "$ref": "#/definitions/option2"
+          },
+        "option4": {
+          "$ref": "#/definitions/option4"
+          }
+      },
+      "example" : {
+        "option1" : {
+                      "dn" : "CN=Dan,CN=Users,DC=ipca,DC=local",
+                      "dominio1" : "ipca",
+                      "dominio2" : "local",
+                      "user" : "Dan",
+                      "cn" : "Users",
+                      "password" : "Ipca2016"
+                    },
+        "option2" : {
+                      "dn": "CN=Luis4,OU=Alunos,DC=ipca,DC=local",
+                      "dominio1" : "ipca",
+                      "dominio2" : "local",
+                      "name" : "luis4",
+                      "ou" : "Alunos",
+                      "objectclass": [  "top", "person", "organizationalPerson",  "user" ]
+                    },    
+      
+      "option4" : {
+                     "userPassword": "Ipca2016"
+       
+      }    
+    },
+      "xml" : {
+        "name" : "DadosEditUserBody"
+      }
+    
+  },
+
+      "DadosUserBody3" : {
+        "type" : "object",
+        "properties" : {
+          "dominio1" : {
+            "type" : "string"
+          },
+          "dominio2" : {
+            "type" : "string"
+          },
+          "user" : {
+            "type" : "string"
+          },
+          "cn" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "ou" : {
+            "type" : "string",
+            "description" : "Se é ponto do instituto"
+          }
+        },
+      "example" : {
+        "dominio1" : "ipca",
+        "dominio2" : "local",
+        "user" : "Dan",
+        "cn" : "Users",
+        "password" : "Ipca2016",
+        "name" : "luis4",
+        "ou" : "Alunos"
+      },
+      "xml" : {
+        "name" : "Local"
+      }
+    }
+
+  
+  }
+}
