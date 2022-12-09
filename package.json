@@ -11,7 +11,7 @@
   "dependencies": {
     "ad": "^0.3.2",
     "async": "^2.6.1",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "generate-password": "^1.4.1",
     "ldapjs": "^1.0.2",
